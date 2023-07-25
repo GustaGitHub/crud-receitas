@@ -5,7 +5,7 @@ export const useNewRevenue = (title, description) => {
         title,
         description
     })
-    .then(() => alert('Receita Adicionada'))
+    .then(() => window.location.reload())
     .catch(() => alert('Falha ao Adicionar Receita, tente novamente'))
 } 
 
