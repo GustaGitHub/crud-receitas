@@ -7,5 +7,5 @@ export const useNewRevenue = (title, description) => {
     })
     .then(() => window.location.reload())
     .catch(() => alert('Falha ao Adicionar Receita, tente novamente'))
-} 
+}
 

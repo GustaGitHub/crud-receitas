@@ -17,11 +17,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/test')
     .catch(err => console.error("Falha ao Realizar conexão com Banco de Dados \n " + err));
 
 app.post("/revenue", async (req, res) => {
-    console.log(req.body)
     var {description, title} = req.body;
 
-    if(description.length <= 0 || title.length <= 0 )
-        res.sendStatus(400);
+    if(description.length <= 0 || title.length <= 0 || description == null || title == null)
+        return res.sendStatus(400);
  
     Revenue.create({
         id:  new mongoose.Types.ObjectId,
@@ -47,7 +46,7 @@ app.get("/revenues", async (req, res) => {
 
 app.get("/revenue/:id", async (req, res) => {
     if(req.params.id.length <= 0 || req.params.id === null)
-        res.sendStatus(400);
+        return res.sendStatus(400);
 
     await Revenue.findOne({id: req.params.id.toString()})
     .then((response) => res.send(response))
@@ -57,9 +56,16 @@ app.get("/revenue/:id", async (req, res) => {
     }) 
 })
 
+app.delete("/revenue", (req, res) => { 
+    console.log(req.body.id)
+
+    Revenue.deleteOne({_id: req.body.id }).exec();
+    res.sendStatus(200);
+})
+
+
 /*
     app.put()
-    app.delete()
 */ 
 
 console.clear();

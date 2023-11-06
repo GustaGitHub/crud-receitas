@@ -9,7 +9,7 @@ export default function App(){
     useEffect(() => {
         const loadRevenues = () => {
             axios.get('http://localhost:8080/revenues')
-            .then(({ data }) => setListRevenues(data))
+            .then(({ data }) => setListRevenues(data) )
             .catch((err) => console.error(err))
         }
         loadRevenues()
@@ -22,9 +22,9 @@ export default function App(){
             <hr/>
             {listRevenues.length > 0 ? listRevenues.map((el) => {
                 return(
-                    <Card description={el.description} title={el.title} key={el.id}/>
+                    <Card description={el.description} title={el.title} key={el._id} id={el._id}/>
                 )
-            }) : (<h4>CARREGANDO</h4>)}
+            }) : (<h4>Nenhuma Receita Cadastrada, Carregando</h4>)}
         </>
     )
 }
